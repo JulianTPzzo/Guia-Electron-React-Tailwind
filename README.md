@@ -13,7 +13,7 @@ npm install --save-dev @babel/core @babel/preset-react babel-loader
 Agregar ReactJS a tu proyecto
 ```sh
 npm install --save react react-dom
-
+```
 Crear main.jsx y configurarlo
 ```sh
 import * as React from 'react';
@@ -22,7 +22,7 @@ import App from './view/App.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
-
+```
 Crear componente App.jsx
 ```sh
 import React from 'react';
@@ -37,8 +37,9 @@ export default App;
 
 ```
 Configurar archivos de Electron Webpack
-```
+
 renderer.js
+```
 ```sh
 import './main.jsx';
 ```
