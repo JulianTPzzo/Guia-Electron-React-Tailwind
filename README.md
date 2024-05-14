@@ -7,6 +7,11 @@ Template de Electron con webpack
 npm init electron-app@latest name-app -- --template=webpack
 ```
 
+Nos posicionamos en la carpeta del proyecto
+```sh
+cd name-app
+```
+
 Instalar babel-loader
 ```sh
 npm install --save-dev @babel/core @babel/preset-react babel-loader
@@ -15,7 +20,12 @@ Agregar ReactJS a tu proyecto
 ```sh
 npm install --save react react-dom
 ```
-Crear main.jsx y configurarlo
+Configuramos index.html
+```sh
+<div id="root"></div>
+```
+
+Crear index.jsx y configurarlo
 ```sh
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -41,11 +51,7 @@ Configurar archivos de Electron Webpack
 
 renderer.js
 ```
-import './main.jsx';
-```
-preload.js
-```sh
-window.ipcRenderer = require('electron').ipcRenderer;
+import './index.jsx';
 ```
 webpack.rules.js
 ```sh
@@ -66,73 +72,6 @@ module.exports = [
   },
 ];
 ```
-forge.config.js se debe ver de la siguiente forma:
-```sh
-const { FusesPlugin } = require('@electron-forge/plugin-fuses');
-const { FuseV1Options, FuseVersion } = require('@electron/fuses');
-
-module.exports = {
-  packagerConfig: {
-    asar: true,
-  },
-  rebuildConfig: {},
-  makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
-  ],
-  plugins: [
-    {
-      name: '@electron-forge/plugin-auto-unpack-natives',
-      config: {},
-    },
-    {
-      name: '@electron-forge/plugin-webpack',
-      config: {
-        mainConfig: './webpack.main.config.js',
-        renderer: {
-          config: './webpack.renderer.config.js',
-          entryPoints: [
-            {
-              html: './src/index.html',
-              js: './src/renderer.js',
-              name: 'main_window',
-              preload: {
-                js: './src/preload.js',
-              },
-            },
-          ],
-        },
-      },
-    },
-    // Fuses are used to enable/disable various Electron functionality
-    // at package time, before code signing the application
-    new FusesPlugin({
-      version: FuseVersion.V1,
-      [FuseV1Options.RunAsNode]: false,
-      [FuseV1Options.EnableCookieEncryption]: true,
-      [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
-      [FuseV1Options.EnableNodeCliInspectArguments]: false,
-      [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
-      [FuseV1Options.OnlyLoadAppFromAsar]: true,
-    }),
-  ],
-};
-
-```
 Instalar dependencias de Tailwind
 ```sh
 npm install --save-dev css-loader style-loader postcss-loader tailwindcss autoprefixer
@@ -141,7 +80,24 @@ Crear archivo de configuración de Tailwind CSS y de PostCSS
 ```sh
 npx tailwindcss init -p
 ```
-postcss.config.js
+tailwind.config.js
+```sh
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+Archivo CSS principal
+```sh
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+postcss.config.js 
 ```sh
 module.exports = {
   plugins: [
@@ -187,21 +143,4 @@ webPreferences: {
   nodeIntegration: true,
   contextIsolation: false,
 },
-```
-tailwind.config.js
-```sh
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
-Archivo CSS principal
-```sh
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 ```
