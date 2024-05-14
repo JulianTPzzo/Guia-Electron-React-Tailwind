@@ -1,4 +1,5 @@
-# Inicializar proyecto Electron React Tailwind
+
+<h1 align="center">Inicializar proyecto Electron React Tailwind</h1>
 
 Template de Electron con webpack
 
