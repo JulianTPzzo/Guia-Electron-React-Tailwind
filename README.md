@@ -66,8 +66,11 @@ module.exports = [
   },
 ];
 ```
-forge.config.js
+forge.config.js se debe ver de la siguiente forma:
 ```sh
+const { FusesPlugin } = require('@electron-forge/plugin-fuses');
+const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+
 module.exports = {
   packagerConfig: {
     asar: true,
@@ -99,12 +102,6 @@ module.exports = {
     {
       name: '@electron-forge/plugin-webpack',
       config: {
-        devContentSecurityPolicy: {
-          directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "data:", "https://cdn.tailwindcss.com"],
-          },
-        },
         mainConfig: './webpack.main.config.js',
         renderer: {
           config: './webpack.renderer.config.js',
@@ -121,8 +118,20 @@ module.exports = {
         },
       },
     },
+    // Fuses are used to enable/disable various Electron functionality
+    // at package time, before code signing the application
+    new FusesPlugin({
+      version: FuseVersion.V1,
+      [FuseV1Options.RunAsNode]: false,
+      [FuseV1Options.EnableCookieEncryption]: true,
+      [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
+      [FuseV1Options.EnableNodeCliInspectArguments]: false,
+      [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
+      [FuseV1Options.OnlyLoadAppFromAsar]: true,
+    }),
   ],
 };
+
 ```
 Instalar dependencias de Tailwind
 ```sh
