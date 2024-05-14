@@ -40,7 +40,6 @@ Configurar archivos de Electron Webpack
 
 renderer.js
 ```
-```sh
 import './main.jsx';
 ```
 preload.js
