@@ -1,6 +1,8 @@
 
 <h1 align="center">Inicializar proyecto Electron React Tailwind</h1>
 
+<p align="center">Tu ⭐ me ayuda mucho, gracias! 😁</p>
+
 Template de Electron con webpack
 
 ```sh
