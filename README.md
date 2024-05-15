@@ -1,8 +1,8 @@
 <h1 align="center">Inicializar proyecto Electron React Tailwind</h1>
 
-<div align="center">
+<a align="center">
   [![Alt text](https://img.youtube.com/vi/-BidnrSKxrQ/0.jpg)](https://www.youtube.com/watch?v=-BidnrSKxrQ)
-</div>
+</a>
 
 <p align="center">Tu ⭐ me ayuda mucho, gracias! 😁</p>
 
