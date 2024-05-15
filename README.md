@@ -1,10 +1,15 @@
 <h1 align="center">Inicializar proyecto Electron React Tailwind</h1>
 
-<a align="center">
-  [![Alt text](https://img.youtube.com/vi/-BidnrSKxrQ/0.jpg)](https://www.youtube.com/watch?v=-BidnrSKxrQ)
-</a>
-
 <p align="center">Tu ⭐ me ayuda mucho, gracias! 😁</p>
+
+<h2 align="center">Vídeo de Youtube</h2>
+<div align="center">
+
+  [![Alt text](https://img.youtube.com/vi/-BidnrSKxrQ/0.jpg)](https://www.youtube.com/watch?v=-BidnrSKxrQ)
+  
+</div>
+
+<h2 align="center">Comandos para creación de proyecto</h2>
 
 Template de Electron con webpack
 
